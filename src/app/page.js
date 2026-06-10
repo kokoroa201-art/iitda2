@@ -3,10 +3,22 @@
 import { useState } from 'react'
 import ApplyModal from '../components/ApplyModal'
 
-const STATS = [
-  { num: '14곳', label: '평균 기관 수', desc: '은행·보험·통신·행정·SNS 등\n한 번에 연락해야 할 곳들' },
-  { num: '23종', label: '최소 필요 서류', desc: '기관마다 요구하는 서류가\n달라서 중복 제출이 생겨요' },
-  { num: '3개월', label: '혼자 처리하면', desc: '직장에 다니면서 혼자 할 경우\n평균 이 시간이 걸립니다' },
+const PAIN_POINTS = [
+  {
+    tag: '여러 기관',
+    title: '은행·통신·보험·행정에 각각 따로',
+    desc: '사망 신고, 계좌 정지, 통신 해지, 보험 청구, 연금 신고 — 각 기관에 개별적으로 연락하고 방문해야 합니다.',
+  },
+  {
+    tag: '서류 준비',
+    title: '기관마다 요구하는 서류가 다릅니다',
+    desc: '사망진단서·가족관계증명서는 공통이지만, 기관에 따라 추가 서류를 별도로 요구해 매번 확인이 필요합니다.',
+  },
+  {
+    tag: '기한 주의',
+    title: '놓치면 불이익이 생기는 절차가 있습니다',
+    desc: '상속 포기·한정승인은 사망 후 3개월 이내, 사망신고는 1개월 이내. 기한이 있는 절차는 미리 파악해야 합니다.',
+  },
 ]
 
 const STEPS = [
@@ -143,16 +155,20 @@ export default function HomePage() {
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
-            {STATS.map((s, i) => (
-              <div key={i} className="bg-white rounded-2xl p-8 shadow-sm"
+            {PAIN_POINTS.map((p, i) => (
+              <div key={i} className="bg-white rounded-2xl p-7 shadow-sm flex flex-col gap-4"
                 style={{ border: '1px solid #EAEFF4' }}>
-                <div className="font-black mb-2"
-                  style={{ fontSize: '3.5rem', color: '#0A0E1A', lineHeight: 1, letterSpacing: '-0.02em' }}>
-                  {s.num}
+                <span className="self-start text-xs font-black px-2.5 py-1 rounded-full"
+                  style={{ background: '#EFF6FF', color: '#0057B8', letterSpacing: '0.04em' }}>
+                  {p.tag}
+                </span>
+                <div>
+                  <p className="font-bold text-[#0A0E1A] mb-2 leading-snug"
+                    style={{ fontSize: '0.95rem', letterSpacing: '-0.02em' }}>
+                    {p.title}
+                  </p>
+                  <p className="text-gray-400 text-sm leading-relaxed">{p.desc}</p>
                 </div>
-                <div className="font-bold text-gray-800 mb-3">{s.label}</div>
-                <p className="text-gray-400 text-sm leading-relaxed"
-                  style={{ whiteSpace: 'pre-line' }}>{s.desc}</p>
               </div>
             ))}
           </div>
@@ -255,7 +271,7 @@ export default function HomePage() {
 
       {/* ── EXPERT CTA ── */}
       <section className="py-24"
-        style={{ background: 'linear-gradient(160deg, #0A0E1A 0%, #0D1F2D 100%)' }}>
+        style={{ background: 'linear-gradient(150deg, #0057B8 0%, #003E85 100%)' }}>
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-10">
             <div className="max-w-lg">
@@ -279,15 +295,14 @@ export default function HomePage() {
             <div className="flex flex-col gap-4 flex-shrink-0">
               <div className="grid grid-cols-3 gap-3">
                 {[
-                  { emoji: '📄', label: '서류\n작성' },
-                  { emoji: '⚖️', label: '법무사\n연결' },
-                  { emoji: '🧾', label: '세무사\n연결' },
+                  { label: '서류 작성' },
+                  { label: '법무사 연결' },
+                  { label: '세무사 연결' },
                 ].map((s, i) => (
-                  <div key={i} className="flex flex-col items-center gap-2 px-4 py-4 rounded-2xl text-center"
-                    style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.09)' }}>
-                    <span className="text-2xl">{s.emoji}</span>
-                    <span className="text-xs font-medium leading-tight whitespace-pre-line"
-                      style={{ color: 'rgba(255,255,255,0.55)' }}>
+                  <div key={i} className="flex items-center justify-center px-3 py-3 rounded-xl text-center"
+                    style={{ background: 'rgba(255,255,255,0.12)', border: '1px solid rgba(255,255,255,0.18)' }}>
+                    <span className="text-xs font-semibold"
+                      style={{ color: 'rgba(255,255,255,0.85)' }}>
                       {s.label}
                     </span>
                   </div>
@@ -296,7 +311,7 @@ export default function HomePage() {
               <button
                 onClick={() => { setApplyType('consult'); setApplyOpen(true) }}
                 className="w-full py-4 rounded-full font-bold text-sm transition-all hover:opacity-90 hover:-translate-y-0.5"
-                style={{ background: '#00C8A5', color: '#0A0E1A', letterSpacing: '-0.01em' }}>
+                style={{ background: '#ffffff', color: '#003E85', letterSpacing: '-0.01em' }}>
                 전문가 도움 요청하기 →
               </button>
             </div>

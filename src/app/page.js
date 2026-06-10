@@ -1,8 +1,5 @@
 'use client'
 
-import { useState } from 'react'
-import ApplyModal from '../components/ApplyModal'
-
 const PAIN_POINTS = [
   {
     tag: '여러 기관',
@@ -49,8 +46,6 @@ const CATEGORIES = [
 ]
 
 export default function HomePage() {
-  const [applyOpen, setApplyOpen] = useState(false)
-  const [applyType, setApplyType] = useState('consult')
 
   return (
     <div className="min-h-screen bg-white">
@@ -85,10 +80,9 @@ export default function HomePage() {
 
             {/* 메인 헤드라인 */}
             <h1 className="font-black text-[#0A0E1A] mb-6"
-              style={{ fontSize: 'clamp(2.2rem, 5vw, 3.8rem)', lineHeight: 1.15, letterSpacing: '-0.02em' }}>
-              슬픔을 추스르기도<br />
-              전에, 행정이<br />
-              <span style={{ color: '#0057B8' }}>기다립니다.</span>
+              style={{ fontSize: 'clamp(1.7rem, 3.2vw, 2.5rem)', lineHeight: 1.2, letterSpacing: '-0.02em' }}>
+              슬픔을 추스르기도 전에,<br />
+              <span style={{ color: '#0057B8' }}>해결해야 할 절차들이 기다립니다.</span>
             </h1>
 
             {/* 서브카피 */}
@@ -142,11 +136,9 @@ export default function HomePage() {
               style={{ color: '#00C8A5', letterSpacing: '0.12em' }}>
               왜 잇다가 필요한가요
             </p>
-            <h2 className="font-black text-[#0A0E1A] mb-4"
-              style={{ fontSize: 'clamp(1.8rem, 4vw, 2.8rem)', lineHeight: 1.15 }}>
-              가족을 잃은 후,<br />
-              <span style={{ color: '#0057B8' }}>행정이 얼마나 많은지</span><br />
-              아시나요?
+            <h2 className="font-black text-[#0A0E1A] mb-4 whitespace-nowrap"
+              style={{ fontSize: 'clamp(1.2rem, 2.5vw, 2rem)', lineHeight: 1.15 }}>
+              가족을 잃은 후, <span style={{ color: '#0057B8' }}>행정이 얼마나 많은지 아시나요?</span>
             </h2>
             <p className="text-gray-500" style={{ lineHeight: 1.8 }}>
               아무도 미리 알려주지 않아요. 장례가 끝나자마자
@@ -192,8 +184,8 @@ export default function HomePage() {
               어떻게 도와드리나요
             </p>
             <h2 className="font-black text-[#0A0E1A]"
-              style={{ fontSize: 'clamp(1.8rem, 4vw, 2.8rem)', lineHeight: 1.15 }}>
-              세 단계면<br />충분해요.
+              style={{ fontSize: 'clamp(1.4rem, 2.8vw, 2.2rem)', lineHeight: 1.15 }}>
+              세 단계면 충분해요.
             </h2>
           </div>
 
@@ -236,8 +228,8 @@ export default function HomePage() {
                 절차 찾기
               </p>
               <h2 className="font-black text-[#0A0E1A]"
-                style={{ fontSize: 'clamp(1.8rem, 4vw, 2.8rem)', lineHeight: 1.15 }}>
-                무엇을 처리해야<br />하시나요?
+                style={{ fontSize: 'clamp(1.4rem, 2.8vw, 2.2rem)', lineHeight: 1.15 }}>
+                무엇을 처리하세요?
               </h2>
             </div>
             <a href="/services" className="text-sm font-semibold text-[#0057B8] hover:text-[#00C8A5] transition-colors flex-shrink-0">
@@ -269,52 +261,27 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ── EXPERT CTA ── */}
-      <section className="py-24"
-        style={{ background: 'linear-gradient(150deg, #0057B8 0%, #003E85 100%)' }}>
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-10">
-            <div className="max-w-lg">
-              <p className="text-xs font-bold tracking-widest uppercase mb-5"
-                style={{ color: '#00C8A5', letterSpacing: '0.12em' }}>
-                혼자 하기 어려울 때
-              </p>
-              <h2 className="font-black text-white mb-5"
-                style={{ fontSize: 'clamp(1.8rem, 4vw, 2.8rem)', lineHeight: 1.15 }}>
-                아무도 이 길을<br />
-                혼자 걸어서는<br />
-                안 됩니다.
-              </h2>
-              <p className="leading-relaxed text-sm" style={{ color: 'rgba(255,255,255,0.55)' }}>
-                직접 처리하기 복잡한 절차는 전문가가 함께합니다.<br />
-                서류 작성 도움부터 법무사·세무사 연결까지.<br />
-                접수 후 1영업일 내 연락드립니다.
-              </p>
-            </div>
-
-            <div className="flex flex-col gap-4 flex-shrink-0">
-              <div className="grid grid-cols-3 gap-3">
-                {[
-                  { label: '서류 작성' },
-                  { label: '법무사 연결' },
-                  { label: '세무사 연결' },
-                ].map((s, i) => (
-                  <div key={i} className="flex items-center justify-center px-3 py-3 rounded-xl text-center"
-                    style={{ background: 'rgba(255,255,255,0.12)', border: '1px solid rgba(255,255,255,0.18)' }}>
-                    <span className="text-xs font-semibold"
-                      style={{ color: 'rgba(255,255,255,0.85)' }}>
-                      {s.label}
-                    </span>
-                  </div>
-                ))}
-              </div>
-              <button
-                onClick={() => { setApplyType('consult'); setApplyOpen(true) }}
-                className="w-full py-4 rounded-full font-bold text-sm transition-all hover:opacity-90 hover:-translate-y-0.5"
-                style={{ background: '#ffffff', color: '#003E85', letterSpacing: '-0.01em' }}>
-                전문가 도움 요청하기 →
-              </button>
-            </div>
+      {/* ── CLOSING CTA — about 페이지 마무리 섹션과 동일 ── */}
+      <section className="py-20 px-4" style={{ backgroundColor: '#F8F7F4' }}>
+        <div className="max-w-3xl mx-auto text-center">
+          <blockquote className="text-2xl font-black text-[#1A2035] mb-5 leading-snug"
+            style={{ letterSpacing: '-0.02em' }}>
+            "아무도 이 길을<br />혼자 걸어서는 안 됩니다."
+          </blockquote>
+          <p className="text-gray-500 text-base leading-relaxed max-w-lg mx-auto mb-10">
+            잇다는 가족을 잃은 모든 분들 곁에 있겠습니다.<br />
+            국적, 나이, 자산 규모에 관계없이, 필요한 사람이라면 누구에게나.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-3 justify-center">
+            <a href="/guide"
+              className="px-8 py-3.5 rounded-full text-white font-bold text-sm shadow-md hover:-translate-y-0.5 transition-all"
+              style={{ background: 'linear-gradient(135deg,#00C8A5,#0057B8)' }}>
+              지금 시작하기
+            </a>
+            <a href="/faq"
+              className="px-8 py-3.5 rounded-full font-semibold text-sm border-2 border-gray-200 hover:border-[#00C8A5]/50 text-[#1A2035] transition-all">
+              자주 묻는 질문
+            </a>
           </div>
         </div>
       </section>
@@ -365,11 +332,6 @@ export default function HomePage() {
         </div>
       </footer>
 
-      <ApplyModal
-        open={applyOpen}
-        onClose={() => setApplyOpen(false)}
-        defaultType={applyType}
-      />
     </div>
   )
 }

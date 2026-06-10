@@ -2,64 +2,48 @@
 
 import { useState } from 'react'
 
+// phase 0: Clearbit       — 국제·주요 브랜드 고화질 로고
+// phase 1: Google Favicon — Clearbit 없는 기업 (KT, LG U+ 등 국내 기업)
+//          단, government 카테고리는 회색지구 반환하므로 건너뜀
+// phase 2: 이모지 폴백
 export default function LogoIcon({ service, size = 56 }) {
-  const [imgLoaded, setImgLoaded] = useState(false)
-  const [imgFailed, setImgFailed] = useState(false)
+  const [phase, setPhase] = useState(0)
 
-  const logoUrl = service.domain
-    ? `https://logo.clearbit.com/${service.domain}`
-    : null
+  const isGov = service.category === 'government'
+
+  const logoUrl = service.logoUrl || (
+    phase === 0 && service.domain
+      ? `https://logo.clearbit.com/${service.domain}`
+      : phase === 1 && service.domain && !isGov
+        ? `https://www.google.com/s2/favicons?domain=${service.domain}&sz=128`
+        : null
+  )
 
   const radius = Math.round(size * 0.28)
-  const abbr = service.name?.slice(0, 2) ?? '?'
-  const showLogo = !!logoUrl && !imgFailed
+  const showImg = !!logoUrl
 
   return (
     <div
-      className="relative flex items-center justify-center flex-shrink-0 overflow-hidden"
+      className="flex items-center justify-center flex-shrink-0 overflow-hidden"
       style={{
         width: size,
         height: size,
         minWidth: size,
         borderRadius: radius,
-        backgroundColor: imgLoaded ? '#FFFFFF' : (service.color || '#64748B'),
-        border: imgLoaded ? '1.5px solid #E8E8E8' : 'none',
+        backgroundColor: showImg ? '#FFFFFF' : service.color,
+        border: showImg ? '1.5px solid #E8E8E8' : 'none',
         boxShadow: '0 2px 8px rgba(0,0,0,0.08)',
       }}
     >
-      {/* 항상 뒤에 텍스트 배지 표시 (로고 없거나 실패 시 보임) */}
-      <span
-        aria-hidden="true"
-        style={{
-          fontSize: size * 0.3,
-          fontWeight: 900,
-          color: '#ffffff',
-          letterSpacing: '-0.02em',
-          lineHeight: 1,
-          userSelect: 'none',
-          opacity: imgLoaded ? 0 : 1,
-          transition: 'opacity 0.15s',
-        }}
-      >
-        {abbr}
-      </span>
-
-      {/* 로고 이미지: 로드 성공 시에만 표시, 실패 시 숨김 */}
-      {showLogo && (
+      {showImg ? (
         <img
           src={logoUrl}
           alt=""
-          className="absolute"
-          style={{
-            width: '72%',
-            height: '72%',
-            objectFit: 'contain',
-            opacity: imgLoaded ? 1 : 0,
-            transition: 'opacity 0.15s',
-          }}
-          onLoad={() => setImgLoaded(true)}
-          onError={() => setImgFailed(true)}
+          style={{ width: '72%', height: '72%', objectFit: 'contain' }}
+          onError={() => setPhase(p => p + 1)}
         />
+      ) : (
+        <span style={{ fontSize: size * 0.44, lineHeight: 1 }}>{service.emoji}</span>
       )}
     </div>
   )

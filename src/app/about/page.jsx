@@ -1,6 +1,7 @@
 'use client'
 
 import Link from 'next/link'
+import { SERVICES } from '../../data/services'
 
 const VALUES = [
   {
@@ -21,7 +22,7 @@ const VALUES = [
 ]
 
 const STATS = [
-  { num: '83+', label: '안내 가능 기관·서비스' },
+  { num: `${SERVICES.length}+`, label: '안내 가능 기관·서비스' },
   { num: '5',   label: '처리 단계 타임라인' },
   { num: '0원', label: '정보 찾기 비용' },
   { num: '3개월', label: '절차 완료 목표 기간' },
@@ -29,7 +30,7 @@ const STATS = [
 
 const HELPS = [
   { title: '무엇을 먼저 해야 하는지', body: '사망 당일부터 3개월까지, 해야 할 일의 순서를 타임라인으로 안내합니다.' },
-  { title: '어디에 연락해야 하는지', body: '은행, 통신사, 보험, SNS 등 83개 기관의 실제 신청 페이지로 직접 연결합니다.' },
+  { title: '어디에 연락해야 하는지', body: `은행, 통신사, 보험, SNS 등 ${SERVICES.length}개 기관의 실제 신청 페이지로 직접 연결합니다.` },
   { title: '어떤 서류를 준비해야 하는지', body: '처리할 서비스를 선택하면, 필요한 서류 목록을 한 번에 정리해드립니다.' },
   { title: '혼자 처리하기 어려울 때', body: '법무사·세무사 연결, 서류 작성 도움 등 전문가 지원 서비스도 함께 제공합니다.' },
 ]
@@ -41,51 +42,39 @@ export default function AboutPage() {
       {/* 1. 스토리 히어로 */}
       <section className="relative overflow-hidden flex items-center" style={{ minHeight: '88vh' }}>
 
-        {/* 배경 이미지 — 밝게 유지 */}
         <div className="absolute inset-0">
           <img
             src="/img/service_info.png"
             alt=""
             className="w-full h-full object-cover object-center"
           />
-          {/* 아주 옅은 오버레이만 — 이미지 본연의 밝음을 살림 */}
           <div className="absolute inset-0"
-            style={{ background: 'rgba(248,247,244,0.22)' }} />
+            style={{ background: 'linear-gradient(105deg, rgba(8,12,24,0.72) 0%, rgba(8,12,24,0.48) 42%, rgba(8,12,24,0.12) 72%, transparent 100%)' }} />
         </div>
 
-        {/* 텍스트 카드 — 중앙 배치, 반투명 흰 배경으로 가독성 확보 */}
-        <div className="relative w-full max-w-6xl mx-auto px-6 lg:px-8 pt-32 pb-20">
-          <div className="max-w-lg">
-            <div className="rounded-2xl px-8 py-10"
-              style={{
-                background: 'rgba(255,255,255,0.90)',
-                backdropFilter: 'blur(12px)',
-                WebkitBackdropFilter: 'blur(12px)',
-                border: '1px solid rgba(255,255,255,0.7)',
-                boxShadow: '0 8px 40px rgba(10,14,26,0.10)',
-              }}>
-              <p className="text-xs font-bold mb-5" style={{ color: '#00A896', letterSpacing: '0.14em' }}>
-                OUR STORY
+        <div className="relative w-full max-w-6xl mx-auto px-6 lg:px-8 pt-36 pb-20">
+          <div className="max-w-lg" style={{ marginLeft: '18%' }}>
+            <p className="text-xs font-bold mb-5" style={{ color: '#00C8A5', letterSpacing: '0.14em' }}>
+              OUR STORY
+            </p>
+            <h1 className="font-black text-white mb-7"
+              style={{ fontSize: 'clamp(1.8rem, 4vw, 2.8rem)', lineHeight: 1.25, letterSpacing: '-0.02em' }}>
+              저희도 같은 시간을<br />지나왔습니다.
+            </h1>
+            <div className="space-y-4" style={{ color: 'rgba(255,255,255,0.80)', fontSize: '0.95rem', lineHeight: 1.85 }}>
+              <p>
+                가족을 잃은 슬픔 앞에서,<br />
+                행정 절차가 또 다른 짐이 되어서는 안 됩니다.
               </p>
-              <h1 className="font-black text-[#0A0E1A] mb-7"
-                style={{ fontSize: 'clamp(1.5rem, 3.5vw, 2.4rem)', lineHeight: 1.25, letterSpacing: '-0.02em' }}>
-                저희도 같은 시간을<br />지나왔습니다.
-              </h1>
-              <div className="space-y-4" style={{ color: '#374151', fontSize: '0.95rem', lineHeight: 1.85 }}>
-                <p>
-                  가족을 잃은 슬픔 앞에서,<br />
-                  행정 절차가 또 다른 짐이 되어서는 안 됩니다.
-                </p>
-                <p>
-                  잇다는 사랑하는 사람을 떠나보낸 뒤<br />
-                  남겨진 복잡한 절차를 직접 경험한 사람들이 만든 플랫폼입니다.
-                </p>
-                <p style={{ color: '#1A2035', fontWeight: 500 }}>
-                  우리가 겪었던 막막함을 다른 누군가는 겪지 않도록,<br />
-                  필요한 정보를 한곳에 모아<br />
-                  조금 더 쉽게, 조금 덜 외롭게 나아갈 수 있도록 돕습니다.
-                </p>
-              </div>
+              <p>
+                잇다는 사랑하는 사람을 떠나보낸 뒤<br />
+                남겨진 복잡한 절차를 직접 경험한 사람들이 만든 플랫폼입니다.
+              </p>
+              <p style={{ color: '#ffffff', fontWeight: 500 }}>
+                우리가 겪었던 막막함을 다른 누군가는 겪지 않도록,<br />
+                필요한 정보를 한곳에 모아<br />
+                조금 더 쉽게, 조금 덜 외롭게 나아갈 수 있도록 돕습니다.
+              </p>
             </div>
           </div>
         </div>

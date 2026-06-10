@@ -134,7 +134,7 @@ export default function ServicesPage() {
 
   const handleCategoryChange = useCallback((catId) => {
     setActiveCategory(catId)
-    window.scrollTo({ top: 0, behavior: 'smooth' })
+    requestAnimationFrame(() => window.scrollTo({ top: 0 }))
   }, [])
 
   const toggleAll = useCallback(() => {
@@ -163,16 +163,19 @@ export default function ServicesPage() {
 
   return (
     <>
-      <div className="min-h-screen" style={{ backgroundColor: '#F8F7F4' }}>
+      <div className="min-h-screen pt-20" style={{ backgroundColor: '#F8F7F4' }}>
 
         <div className="bg-white border-b border-gray-100 sticky top-20 z-10">
           <div className="max-w-2xl mx-auto px-4 pt-4 pb-0">
-            <div className="flex items-baseline gap-3 mb-3">
+            <div className="flex items-baseline gap-3 mb-1">
               <h1 className="text-xl font-black text-[#1A2035]" style={{ letterSpacing: '-0.035em' }}>
                 서비스 찾기
               </h1>
               <p className="text-xs text-gray-400">서비스를 선택해 절차를 한번에 확인하세요</p>
             </div>
+            <p className="text-xs mb-3" style={{ color: '#00A896', letterSpacing: '-0.01em' }}>
+              모르셔도 괜찮습니다. 잇다가 하나씩 함께 확인해 드리겠습니다.
+            </p>
 
             <div className="relative mb-2">
               <svg className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" viewBox="0 0 16 16" fill="none">
@@ -216,19 +219,23 @@ export default function ServicesPage() {
             </div>
 
             <div className="flex items-center justify-between py-2.5 border-t border-gray-50 mt-2">
-              <button
-                onClick={toggleAll}
-                className={`flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-bold transition-all ${
-                  allFilteredSelected
-                    ? 'bg-[#00C8A5] text-white'
-                    : someFilteredSelected
-                      ? 'bg-[#00C8A5]/15 text-[#007A68] border border-[#00C8A5]/40'
-                      : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
-                }`}>
-                <span>{allFilteredSelected ? '전체해제' : '전체선택'}</span>
-              </button>
+              <div className="flex items-center gap-2 flex-wrap group cursor-pointer" onClick={toggleAll}>
+                <button
+                  className={`flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-bold transition-all pointer-events-none ${
+                    allFilteredSelected
+                      ? 'bg-[#00C8A5] text-white'
+                      : someFilteredSelected
+                        ? 'bg-[#00C8A5]/15 text-[#007A68] border border-[#00C8A5]/40'
+                        : 'bg-gray-100 text-gray-600 group-hover:bg-gray-200'
+                  }`}>
+                  <span>{allFilteredSelected ? '전체해제' : '전체선택'}</span>
+                </button>
+                <span className="text-xs text-gray-400 transition-all group-hover:text-gray-700 group-hover:font-semibold" style={{ letterSpacing: '-0.01em' }}>
+                  이용 기관이 불확실하다면 전체 선택을 권장합니다
+                </span>
+              </div>
               {selectedCount > 0 && (
-                <span className="text-xs text-gray-400 font-medium">
+                <span className="text-xs text-gray-400 font-medium flex-shrink-0">
                   {selectedCount}개 선택됨
                 </span>
               )}

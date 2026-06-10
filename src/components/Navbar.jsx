@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import { usePathname } from 'next/navigation'
 
 const NAV_LINKS = [
   { label: '서비스 소개',    href: '/about' },
@@ -19,6 +20,7 @@ const QUICK_SITUATIONS = [
 
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false)
+  const pathname = usePathname()
 
   return (
     <>
@@ -43,13 +45,25 @@ export default function Navbar() {
 
             {/* 데스크탑 메뉴 */}
             <div className="hidden md:flex items-center gap-7">
-              {NAV_LINKS.map(l => (
-                <a key={l.label} href={l.href}
-                  className="text-sm font-medium text-gray-500 hover:text-[#0057B8] transition-colors"
-                  style={{ letterSpacing: '-0.01em' }}>
-                  {l.label}
-                </a>
-              ))}
+              {NAV_LINKS.map(l => {
+                const isActive = pathname === l.href || pathname.startsWith(l.href + '/')
+                return (
+                  <a key={l.label} href={l.href}
+                    className="text-sm transition-colors"
+                    style={{
+                      letterSpacing: '-0.01em',
+                      color: isActive ? '#0A0E1A' : undefined,
+                      fontWeight: isActive ? 800 : 500,
+                    }}
+                    onMouseEnter={e => { if (!isActive) e.currentTarget.style.color = '#0057B8' }}
+                    onMouseLeave={e => { if (!isActive) e.currentTarget.style.color = '' }}>
+                    {l.label}
+                    {isActive && (
+                      <div className="mt-0.5 h-0.5 rounded-full" style={{ background: '#0057B8' }} />
+                    )}
+                  </a>
+                )
+              })}
             </div>
 
             {/* 데스크탑 우측 버튼 */}
@@ -108,13 +122,18 @@ export default function Navbar() {
 
             {/* 일반 메뉴 */}
             <div className="space-y-1">
-              {NAV_LINKS.map(l => (
-                <a key={l.label} href={l.href}
-                  onClick={() => setMenuOpen(false)}
-                  className="block py-2.5 px-2 text-sm font-medium text-gray-600 hover:text-[#0057B8] transition-colors">
-                  {l.label}
-                </a>
-              ))}
+              {NAV_LINKS.map(l => {
+                const isActive = pathname === l.href || pathname.startsWith(l.href + '/')
+                return (
+                  <a key={l.label} href={l.href}
+                    onClick={() => setMenuOpen(false)}
+                    className="flex items-center justify-between py-2.5 px-2 text-sm transition-colors"
+                    style={{ color: isActive ? '#0A0E1A' : '#4B5563', fontWeight: isActive ? 800 : 500 }}>
+                    {l.label}
+                    {isActive && <div className="w-1.5 h-1.5 rounded-full" style={{ background: '#0057B8' }} />}
+                  </a>
+                )
+              })}
             </div>
           </div>
         )}

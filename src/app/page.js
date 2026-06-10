@@ -44,18 +44,18 @@ export default function HomePage() {
     <div className="min-h-screen bg-white">
 
       {/* ── HERO ── */}
-      <section className="relative min-h-screen flex items-center overflow-hidden bg-white">
+      <section className="relative min-h-screen flex items-center overflow-hidden">
 
-        {/* 오른쪽 사진 영역 */}
-        <div className="absolute inset-y-0 right-0 w-full lg:w-3/5 overflow-hidden">
+        {/* 전체 배경 이미지 */}
+        <div className="absolute inset-0">
           <img
             src="/img/main_background.png"
             alt=""
             className="w-full h-full object-cover object-center"
           />
-          {/* 왼쪽으로 페이드 */}
+          {/* 텍스트 가독성을 위한 왼쪽 그라데이션 오버레이 */}
           <div className="absolute inset-0"
-            style={{ background: 'linear-gradient(90deg, #ffffff 0%, rgba(255,255,255,0.92) 25%, rgba(255,255,255,0.4) 55%, transparent 100%)' }} />
+            style={{ background: 'linear-gradient(100deg, rgba(255,255,255,0.97) 0%, rgba(255,255,255,0.92) 30%, rgba(255,255,255,0.6) 55%, rgba(255,255,255,0.1) 80%, transparent 100%)' }} />
         </div>
 
         {/* 텍스트 영역 */}

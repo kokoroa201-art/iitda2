@@ -38,24 +38,48 @@ export default function AboutPage() {
   return (
     <div className="min-h-screen bg-white">
 
-      {/* 1. 미션 히어로 */}
-      <section className="pt-20 py-24 px-4 text-center"
-        style={{ background: 'linear-gradient(150deg,#0A1628 0%,#1A3A5C 100%)' }}>
-        <div className="max-w-3xl mx-auto">
-          <p className="text-sm font-bold mb-6" style={{ color: '#00C8A5', letterSpacing: '0.12em' }}>
-            OUR MISSION
-          </p>
-          <h1 className="font-black text-white mb-8"
-            style={{ fontSize: 'clamp(2rem, 5vw, 3.2rem)', lineHeight: 1.2, letterSpacing: '-0.02em' }}>
-            가족을 잃은 슬픔 앞에서,<br />
-            행정 절차가 또 다른 짐이<br />
-            되어서는 안 됩니다.
-          </h1>
-          <p className="text-lg leading-relaxed max-w-xl mx-auto" style={{ color: 'rgba(255,255,255,0.65)' }}>
-            잇다는 대한민국에서 가족을 잃은 분들이<br />
-            남겨진 일들을 조금 더 쉽게, 덜 외롭게 처리할 수 있도록<br />
-            만들어진 플랫폼입니다.
-          </p>
+      {/* 1. 스토리 히어로 */}
+      <section className="relative overflow-hidden" style={{ minHeight: '92vh' }}>
+
+        {/* 배경 이미지 */}
+        <div className="absolute inset-0">
+          <img
+            src="/img/service_info.png"
+            alt=""
+            className="w-full h-full object-cover object-center"
+          />
+          {/* 아래쪽으로 자연스럽게 어두워지는 오버레이 */}
+          <div className="absolute inset-0"
+            style={{ background: 'linear-gradient(to bottom, rgba(10,14,26,0.18) 0%, rgba(10,14,26,0.45) 50%, rgba(10,14,26,0.82) 100%)' }} />
+        </div>
+
+        {/* 텍스트 — 하단 중앙 */}
+        <div className="relative flex items-end justify-center h-full" style={{ minHeight: '92vh' }}>
+          <div className="max-w-2xl mx-auto px-6 pb-20 pt-40 text-center">
+            <p className="text-xs font-bold mb-8" style={{ color: '#00C8A5', letterSpacing: '0.14em' }}>
+              OUR STORY
+            </p>
+            <h1 className="font-black text-white mb-8"
+              style={{ fontSize: 'clamp(1.6rem, 4vw, 2.8rem)', lineHeight: 1.3, letterSpacing: '-0.02em' }}>
+              저희도 같은 시간을 지나왔습니다.
+            </h1>
+            <div className="space-y-4 text-left max-w-xl mx-auto"
+              style={{ color: 'rgba(255,255,255,0.82)', fontSize: '1rem', lineHeight: 1.9 }}>
+              <p>
+                가족을 잃은 슬픔 앞에서,<br />
+                행정 절차가 또 다른 짐이 되어서는 안 됩니다.
+              </p>
+              <p>
+                잇다는 사랑하는 사람을 떠나보낸 뒤<br />
+                남겨진 복잡한 절차를 직접 경험한 사람들이 만든 플랫폼입니다.
+              </p>
+              <p>
+                우리가 겪었던 막막함을 다른 누군가는 겪지 않도록,<br />
+                필요한 정보를 한곳에 모아<br />
+                조금 더 쉽게, 조금 덜 외롭게 나아갈 수 있도록 돕습니다.
+              </p>
+            </div>
+          </div>
         </div>
       </section>
 
